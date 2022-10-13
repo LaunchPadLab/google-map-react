@@ -56,10 +56,10 @@ export default class GoogleMapMarkers extends Component {
     this.allowMouse_ = true;
 
     this.state = { ...this._getState(), hoverKey: null };
+    this.props.dispatcher.on('kON_CHANGE', this._onChangeHandler);
   }
 
   componentDidMount() {
-    this.props.dispatcher.on('kON_CHANGE', this._onChangeHandler);
     this.props.dispatcher.on(
       'kON_MOUSE_POSITION_CHANGE',
       this._onMouseChangeHandler
@@ -111,12 +111,15 @@ export default class GoogleMapMarkers extends Component {
     const prevChildCount = (this.state.children || []).length;
     const state = this._getState();
 
-    this.setState(
-      state,
-      () =>
-        (state.children || []).length !== prevChildCount &&
-        this._onMouseChangeHandler()
-    );
+    ReactDOM.flushSync(() => {
+      console.log('flush')
+      this.setState(
+        state,
+        () =>
+          (state.children || []).length !== prevChildCount &&
+          this._onMouseChangeHandler()
+      );
+    })
   };
 
   _onChildClick = () => {
