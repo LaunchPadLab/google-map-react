@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import ReactDOM from 'react-dom';
 
 // utils
 import omit from './utils/omit';
@@ -109,12 +110,14 @@ export default class GoogleMapMarkers extends Component {
     const prevChildCount = (this.state.children || []).length;
     const state = this._getState();
 
-    this.setState(
-      state,
-      () =>
-        (state.children || []).length !== prevChildCount &&
-        this._onMouseChangeHandler()
-    );
+    ReactDOM.flushSync(() => {
+      this.setState(
+        state,
+        () =>
+          (state.children || []).length !== prevChildCount &&
+          this._onMouseChangeHandler()
+      );        
+    })
   };
 
   _onChildClick = () => {
