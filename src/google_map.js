@@ -425,6 +425,7 @@ class GoogleMap extends Component {
       }
     }
     // emit actions
+    console.log('change 1!')
     this.markersDispatcher_.emit('kON_CHANGE');
 
     if (!shallowEqual(this.props.hoverDistance, prevProps.hoverDistance)) {
@@ -705,6 +706,7 @@ class GoogleMap extends Component {
             this_._onChildMouseMove();
 
             if (this_.markersDispatcher_) {
+              console.log('change 2!')
               this_.markersDispatcher_.emit('kON_CHANGE');
               if (this_.fireMouseEventOnIdle_) {
                 this_.markersDispatcher_.emit('kON_MOUSE_POSITION_CHANGE');
@@ -787,6 +789,7 @@ class GoogleMap extends Component {
           this_.dragTime_ = 0;
 
           if (this_.markersDispatcher_) {
+            console.log('change 3!')
             this_.markersDispatcher_.emit('kON_CHANGE');
           }
         });
