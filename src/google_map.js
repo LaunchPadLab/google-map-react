@@ -790,6 +790,8 @@ class GoogleMap extends Component {
 
           if (this_.markersDispatcher_) {
             console.log('change 3!')
+            console.log('map object', this)
+            console.log('marker dispatch', this_.markersDispatcher_)
             this_.markersDispatcher_.emit('kON_CHANGE');
           }
         });

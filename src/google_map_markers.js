@@ -103,6 +103,7 @@ export default class GoogleMapMarkers extends Component {
   });
 
   _onChangeHandler = () => {
+    console.log('marker object', this)
     if (!this.dimensionsCache_) {
       return;
     }
@@ -110,14 +111,12 @@ export default class GoogleMapMarkers extends Component {
     const prevChildCount = (this.state.children || []).length;
     const state = this._getState();
 
-    ReactDOM.flushSync(() => {
-      this.setState(
-        state,
-        () =>
-          (state.children || []).length !== prevChildCount &&
-          this._onMouseChangeHandler()
-      );        
-    })
+    this.setState(
+      state,
+      () =>
+        (state.children || []).length !== prevChildCount &&
+        this._onMouseChangeHandler()
+    );
   };
 
   _onChildClick = () => {
