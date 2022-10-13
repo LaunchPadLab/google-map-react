@@ -790,7 +790,9 @@ class GoogleMap extends Component {
 
           if (this_.markersDispatcher_) {
             console.log('change 3!')
-            this_.markersDispatcher_.emit('kON_CHANGE');
+            ReactDOM.flushSync(() => {
+              this_.markersDispatcher_.emit('kON_CHANGE');
+            })
           }
         });
 
